@@ -53,8 +53,52 @@
                     <field name="table_number" />
                     <field name="is_urgent" />
                     <field name="note" />
-
                 </tree>
+            </field>
+        </record>
+
+        <!-- meal order search view -->
+        <record id="meal_order_search_view" model="ir.ui.view">
+            <field name="name">meal.order.search.view</field>
+            <field name="model">meal.order</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="customer_id" string="Customer" />
+                    <field name="order_type" string="Type" />
+                    <field name="total_price" string="Total Price" />
+
+                    <separator string="Type Order" colspan="4" />
+                    <filter name="type_internal"
+                        string="Internal"
+                        domain="[('order_type', '=', 'internal')]" />
+
+                    <filter name="type_external"
+                        string="External"
+                        domain="[('order_type', '=', 'external')]" />
+
+                    <separator colspan="4" />
+                    <filter name="urgent"
+                        string="Is Urgent"
+                        domain="[('is_urgent', '=', True)]" />
+
+                    <separator />
+                    <filter name="today_order"
+                        string="Today Order"
+                        domain="[('order_date', '=', time.strftime('%Y-%m-%d'))]" />
+
+
+                    <group name="group_by" string="Group By">
+                        <filter name="order_type"
+                            string="Order Type"
+                            context="{'group_by' : 'order_type'}" />
+
+                        <filter name="urgent"
+                            string="Is Urgent"
+                            context="{'group_by' : 'is_urgent'}" />
+
+                    </group>
+
+                </search>
             </field>
         </record>
 
