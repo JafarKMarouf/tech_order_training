@@ -6,5 +6,9 @@ class Category(models.Model):
     _description = 'Order Meal Category'
     _order = 'name'
     
-    name = fields.Char(string = 'Name')
+    name = fields.Char(
+        string = 'Name', 
+        required=True,
+        copy = False
+    )
 

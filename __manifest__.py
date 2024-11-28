@@ -8,7 +8,7 @@
 Long description of module's purpose
     """,
 
-    'author': "My Company",
+    'author': "Jafar Marouf",
     'website': "https://www.yourcompany.com",
 
     # Categories can be used to filter modules in modules listing
@@ -23,10 +23,12 @@ Long description of module's purpose
     # always loaded
     'data': [
         'security/ir.model.access.csv',
-        'views/category.xml',
-        'views/meal.xml',
         'views/views.xml',
         'views/templates.xml',
+        'views/category.xml',
+        'views/meal.xml',
+        'views/order.xml',
+        'views/order_tag.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

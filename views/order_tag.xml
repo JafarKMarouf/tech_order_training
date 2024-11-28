@@ -1,0 +1,46 @@
+<odoo>
+    <data>
+        <!-- order tag form view -->
+        <record id="order_tag_form_view" model="ir.ui.view">
+            <field name="name">order.tag.form.view</field>
+            <field name="model">order.tag</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name" />
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- order tag tree view -->
+        <record id="order_tag_tree_view" model="ir.ui.view">
+            <field name="name">order.tag.tree.view</field>
+            <field name="model">order.tag</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>
+
+        <!-- window action for order tag -->
+        <record id="order_tag_window_action" model="ir.actions.act_window">
+            <field name="name">Tags</field>
+            <field name="res_model">order.tag</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- order tag menu item -->
+        <menuitem
+            id="order_tag_menu"
+            name="Tags"
+            parent="meal_base_order_menu"
+            action="order_tag_window_action" />
+
+    </data>
+</odoo>

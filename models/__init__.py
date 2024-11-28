@@ -3,3 +3,5 @@
 from . import models
 from . import meal
 from . import category
+from . import order
+from . import order_tag

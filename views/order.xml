@@ -1,0 +1,74 @@
+<odoo>
+    <data>
+        <!-- meal order form view -->
+        <record id="meal_order_form_view" model="ir.ui.view">
+            <field name="name">meal.order.form.view</field>
+            <field name="model">meal.order</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <h1>
+                                <field name="name" />
+                            </h1>
+                            <group>
+                                <field name="total_price" />
+                                <field name="order_date" />
+                            </group>
+                            <group>
+                                <field name='customer_id' />
+                                <field name="order_type" />
+                            </group>
+                            <group>
+                                <field name="note" />
+                            </group>
+                            <group>
+                                <field name="order_tag_ids"
+                                    widget='many2many_tags'
+                                    options="{'color_field': 'color', 'no_create_edit': True}" />
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- meal order tree view -->
+        <record id="meal_order_tree_view" model="ir.ui.view">
+            <field name="name">meal.order.tree.view</field>
+            <field name="model">meal.order</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name" />
+                    <field name="customer_id" />
+                    <field name="order_type" />
+                    <field name="order_date" />
+                    <field name="total_price" />
+                    <field name="order_tag_ids" />
+                    <field name="note" />
+
+                </tree>
+            </field>
+        </record>
+
+        <!-- window action for meal order-->
+        <record id="meal_order_window_action" model="ir.actions.act_window">
+            <field name="name">Order</field>
+            <field name="res_model">meal.order</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Order menu item -->
+        <menuitem
+            id="meal_base_order_menu"
+            name="Orders"
+            parent="order_base_menu" />
+
+        <menuitem
+            id="meal_order_menu"
+            name="Order"
+            parent="meal_base_order_menu"
+            action="meal_order_window_action" />
+
+    </data>
+</odoo>
