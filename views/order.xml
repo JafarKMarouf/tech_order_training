@@ -8,9 +8,11 @@
                 <form>
                     <sheet>
                         <group>
-                            <h1>
-                                <field name="name" />
-                            </h1>
+                            <group>
+                                <h1>
+                                    <field name="name" />
+                                </h1>
+                            </group>
                             <group>
                                 <field name="total_price" />
                                 <field name="order_date" />
@@ -20,13 +22,16 @@
                                 <field name="order_type" />
                             </group>
                             <group>
-                                <field name="note" />
-                            </group>
-                            <group>
                                 <field name="order_tag_ids"
                                     widget='many2many_tags'
-                                    options="{'color_field': 'color', 'no_create_edit': True}" />
+                                    options="{'color_field': 'color', 'no_create': True}" />
+                                <field name="table_number" />
+                                <field name="is_urgent" />
                             </group>
+                            <group>
+                                <field name="note" />
+                            </group>
+
                         </group>
                     </sheet>
                 </form>
@@ -41,10 +46,12 @@
                 <tree>
                     <field name="name" />
                     <field name="customer_id" />
-                    <field name="order_type" />
-                    <field name="order_date" />
                     <field name="total_price" />
                     <field name="order_tag_ids" />
+                    <field name="order_date" />
+                    <field name="order_type" />
+                    <field name="table_number" />
+                    <field name="is_urgent" />
                     <field name="note" />
 
                 </tree>

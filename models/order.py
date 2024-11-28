@@ -31,6 +31,9 @@ class Order(models.Model):
             default=fields.datetime.now().date(),
             readonly=True
     )
+    is_urgent = fields.Boolean(string = 'Is Urgent', copy = False)
+    active = fields.Boolean(default=True)
+    table_number = fields.Integer(string = 'Table Number')
     total_price = fields.Float(string = 'Total Price', copy=False)
     order_tag_ids = fields.Many2many('order.tag', string = 'Tags')
     
