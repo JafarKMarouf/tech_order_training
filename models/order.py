@@ -6,7 +6,6 @@ import logging
 _logger = logging.getLogger(__name__)
 
 class Order(models.Model):
-
     _name = 'meal.order'
     _description = 'Meal Order Model'
     _order = 'name'
@@ -39,6 +38,7 @@ class Order(models.Model):
     table_number = fields.Integer(string = 'Table Number')
     total_price = fields.Float(string = 'Total Price', copy=False)
     order_tag_ids = fields.Many2many('order.tag', string = 'Tags')
+    item_ids = fields.One2many('order.item', 'order_id', string="Items")    
     
     _sql_constraints = [
         ('name_uniq', 'UNIQUE (name)', 'Order name already exists!'),

@@ -31,8 +31,32 @@
                             <group>
                                 <field name="note" />
                             </group>
-
                         </group>
+                        <notebook>
+                            <page string="Items">
+                                <field name="item_ids">
+                                    <tree>
+                                        <field name='meal_id' />
+                                        <field name='quantity' />
+                                        <field name='price' />
+                                        <field name='total_price' />
+                                    </tree>
+
+                                    <form>
+                                        <sheet>
+                                            <group>
+                                                <field name='meal_id' />
+                                                <field name='quantity' />
+                                            </group>
+                                            <group>
+                                                <field name='price' />
+                                                <field name='total_price' />
+                                            </group>
+                                        </sheet>
+                                    </form>
+                                </field>
+                            </page>
+                        </notebook>
                     </sheet>
                 </form>
             </field>

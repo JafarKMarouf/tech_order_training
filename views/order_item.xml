@@ -1,0 +1,54 @@
+<odoo>
+    <data>
+        <!-- order item form view -->
+        <record id="order_item_form_view" model="ir.ui.view">
+            <field name="name">order.item.form.view</field>
+            <field name="model">order.item</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="meal_id" />
+                                <field name="order_id" />
+                                <field name="price" />
+                                <field name="quantity" />
+                                <field name="total_price" />
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- order item tree view -->
+        <record id="order_item_tree_view" model="ir.ui.view">
+            <field name="name">order.item.tree.view</field>
+            <field name="model">order.item</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="meal_id" />
+                    <field name="order_id" />
+                    <field name="price" />
+                    <field name="quantity" />
+                    <field name="total_price" />
+                </tree>
+            </field>
+        </record>
+
+        <!-- window action for order tem-->
+        <record id="order_item_window_action" model="ir.actions.act_window">
+            <field name="name">Order Item</field>
+            <field name="res_model">order.item</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- menu item for order item-->
+        <menuitem
+            id="order_item_menu"
+            name="Order Item"
+            parent="meal_base_order_menu"
+            action="order_item_window_action" />
+
+    </data>
+</odoo>
