@@ -1,6 +1,9 @@
-from odoo import _, fields, models # type: ignore
+from odoo import _, api, fields, models # type: ignore
 from datetime import date, datetime, timedelta
+from odoo.exceptions import ValidationError # type: ignore
 
+import logging
+_logger = logging.getLogger(__name__)
 
 class Order(models.Model):
 
@@ -28,12 +31,25 @@ class Order(models.Model):
     order_date = fields.Datetime(
             string='Order Date',
             copy = False,
-            default=fields.datetime.now().date(),
-            readonly=True
+            default = fields.datetime.now().date(),
+            # readonly=True
     )
     is_urgent = fields.Boolean(string = 'Is Urgent', copy = False)
     active = fields.Boolean(default=True)
     table_number = fields.Integer(string = 'Table Number')
     total_price = fields.Float(string = 'Total Price', copy=False)
     order_tag_ids = fields.Many2many('order.tag', string = 'Tags')
+    
+    _sql_constraints = [
+        ('name_uniq', 'UNIQUE (name)', 'Order name already exists!'),
+    ]
+    
+    # constrains on order date in ORM Level
+    @api.constrains('order_date')
+    def _check_order_date(self):
+        # _logger.error("order date: "+str(self.order_date.date()))
+        # _logger.error("today: "+str(datetime.now().date()))
+        for record in self:
+            if record.order_date.date() < datetime.now().date():
+                raise ValidationError('Order Date Must not be in past')
     
