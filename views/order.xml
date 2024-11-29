@@ -6,30 +6,77 @@
             <field name="model">meal.order</field>
             <field name="arch" type="xml">
                 <form>
+                    <header>
+                        <button
+                            string="Confirm"
+                            name="action_confirm"
+                            type="object"
+                            invisible="state != 'draft'"
+                            class="btn-primary" />
+                        <button
+                            string="InProcess"
+                            name="action_in_process"
+                            type="object"
+                            invisible="state != 'confirm'"
+                            class="btn-info" />
+
+                        <button
+                            string="Delivered"
+                            name="action_delivered"
+                            type="object"
+                            invisible="state != 'in_process'"
+                            class="btn-dark" />
+                        <button
+                            string="Cancel"
+                            name="action_cancel"
+                            type="object"
+                            invisible="state in ('delivered','cancel')"
+                            class="btn-danger" />
+
+                        <field
+                            name='state'
+                            widget='statusbar'
+                            statusbar_visible="draft, confirm, in_process, delivered" />
+                    </header>
                     <sheet>
+                        <h1>
+                            <field name="name" required="state == 'draft'"
+                                readonly="state not in ('draft','confirm')" />
+                        </h1>
                         <group>
                             <group>
-                                <h1>
-                                    <field name="name" />
-                                </h1>
-                            </group>
-                            <group>
-                                <field name="total_price" />
-                                <field name="order_date" />
-                            </group>
-                            <group>
-                                <field name='customer_id' />
-                                <field name="order_type" />
-                            </group>
-                            <group>
+                                <field name='customer_id'
+                                    required="state == 'draft'"
+                                    readonly="state not in ('draft','confirm')" />
+
+                                <field name="order_type"
+                                    readonly="state in ('cancel','in_process','delivered')" />
+
                                 <field name="order_tag_ids"
                                     widget='many2many_tags'
+                                    required="state != 'confirme'"
+                                    readonly="state in ('cancel','in_process','delivered')"
                                     options="{'color_field': 'color', 'no_create': True}" />
-                                <field name="table_number" />
-                                <field name="is_urgent" />
                             </group>
                             <group>
-                                <field name="note" />
+                                <field name="total_price" required="state != 'confirm'" />
+
+                                <field name="order_date"
+                                    readonly="state in ('confirm','cancel','in_process','delivered')" />
+
+                                <field name="is_urgent" required="state != 'confirm'"
+                                    readonly="state in ('cancel','in_process','delivered')" />
+
+                                <field name="table_number"
+                                    invisible="order_type != 'internal'"
+                                    required="order_type == 'internal'" />
+
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="note"
+                                    readonly="state in ('cancel','in_process','delivered')" />
                             </group>
                         </group>
                         <notebook>
@@ -67,16 +114,29 @@
             <field name="name">meal.order.tree.view</field>
             <field name="model">meal.order</field>
             <field name="arch" type="xml">
-                <tree>
+                <tree
+                    decoration-muted="state == 'draft'"
+                    decoration-primary="state == 'confirm'"
+                    decoration-info="state == 'in_process'"
+                    decoration-danger="state == 'cancel'"
+                    decoration-success="state == 'delivered'"
+                >
                     <field name="name" />
                     <field name="customer_id" />
-                    <field name="total_price" />
-                    <field name="order_tag_ids" />
+                    <field name="total_price" optional="hide" />
                     <field name="order_date" />
+                    <field name="state" widget="badge"
+                        decoration-muted="state == 'draft'"
+                        decoration-primary="state == 'confirm'"
+                        decoration-info="state == 'in_process'"
+                        decoration-danger="state == 'cancel'"
+                        decoration-success="state == 'delivered'"
+                    />
                     <field name="order_type" />
-                    <field name="table_number" />
-                    <field name="is_urgent" />
-                    <field name="note" />
+                    <field name="table_number"
+                        invisible="order_type != 'external'" />
+                    <field name="is_urgent" optional="show" />
+                    <field name="note" optional="hide" />
                 </tree>
             </field>
         </record>

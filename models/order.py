@@ -27,10 +27,10 @@ class Order(models.Model):
         default='internal'
     )
     note = fields.Text(string = 'Note')
-    order_date = fields.Datetime(
+    order_date = fields.Date(
             string='Order Date',
             copy = False,
-            default = fields.datetime.now().date(),
+            default = fields.datetime.now(),
             # readonly=True
     )
     is_urgent = fields.Boolean(string = 'Is Urgent', copy = False)
@@ -39,6 +39,15 @@ class Order(models.Model):
     total_price = fields.Float(string = 'Total Price', copy=False)
     order_tag_ids = fields.Many2many('order.tag', string = 'Tags')
     item_ids = fields.One2many('order.item', 'order_id', string="Items")    
+    state = fields.Selection([
+        ('draft', 'Draft'),
+        ('confirm', 'Confirmed'),
+        ('in_process', 'In Process'),
+        ('cancel', 'Cancelled'),
+        ('delivered', 'Delivered'),
+        ], string='State',
+        default='draft'
+    )
     
     _sql_constraints = [
         ('name_uniq', 'UNIQUE (name)', 'Order name already exists!'),
@@ -50,6 +59,20 @@ class Order(models.Model):
         # _logger.error("order date: "+str(self.order_date.date()))
         # _logger.error("today: "+str(datetime.now().date()))
         for record in self:
-            if record.order_date.date() < datetime.now().date():
+            if record.order_date < datetime.now().date():
                 raise ValidationError('Order Date Must not be in past')
+    
+    def action_confirm(self):
+        self.state = 'confirm'
+        self.order_date = datetime.now().date()
+    
+    def action_in_process(self):
+        self.state = 'in_process' 
+ 
+    def action_delivered(self):
+        self.state = 'delivered' 
+ 
+    def action_cancel(self):
+        self.state = 'cancel'
+    
     
