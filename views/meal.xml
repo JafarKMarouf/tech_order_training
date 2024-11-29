@@ -6,6 +6,14 @@
             <field name="model">order.meal</field>
             <field name="arch" type="xml">
                 <form>
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                            name="view_all_feedbacks"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-pencil-square-o"
+                            string='Feedback' />
+                    </div>
                     <sheet>
                         <group>
                             <group>
@@ -44,7 +52,6 @@
                                 </field>
                             </page>
                         </notebook>
-
                     </sheet>
                 </form>
             </field>
