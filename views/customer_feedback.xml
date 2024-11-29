@@ -1,0 +1,59 @@
+<odoo>
+    <data>
+        <!-- customer feedback form view -->
+        <record id="customer_feedback_form_view" model="ir.ui.view">
+            <field name="name">customer.feedback.form.view</field>
+            <field name="model">customer.feedback</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name" />
+                            </group>
+                            <group>
+                                <field name="meal_id" />
+                                <field name="customer_id" />
+                            </group>
+                            <group>
+                                <field name="comment" />
+                                <field name="rate" />
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- customer feedback tree view -->
+        <record id="customer_feedback_tree_view" model="ir.ui.view">
+            <field name="name">customer.feedback.tree.view</field>
+            <field name="model">customer.feedback</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name" />
+                    <field name="meal_id" />
+                    <field name="customer_id" />
+                    <field name="comment" />
+                    <field name="rate" widget='priority' />
+                </tree>
+            </field>
+        </record>
+
+        <!-- window action for customer feedback -->
+        <record id="customer_feedback_window_action" model="ir.actions.act_window">
+            <field name="name">Feedback</field>
+            <field name="res_model">customer.feedback</field>
+            <field name="view_mode">tree,form</field>
+            <field name='context'>{'create' : False, 'edit' : False}</field>
+        </record>
+
+        <!-- base menu item -->
+        <menuitem
+            id="customer_feedback_menu"
+            name="Feedback"
+            parent="order_base_menu"
+            action="customer_feedback_window_action" />
+
+    </data>
+</odoo>

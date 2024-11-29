@@ -28,7 +28,8 @@ Long description of module's purpose
         "views/order.xml",
         "views/order_tag.xml",
         "views/order_item.xml",
-        "views/meal_ingredient.xml"
+        "views/meal_ingredient.xml",
+        "views/customer_feedback.xml"
     ],
     # only loaded in demonstration mode
     'demo': [
