@@ -16,6 +16,35 @@
                                 <field name="category_id" />
                             </group>
                         </group>
+
+                        <notebook>
+                            <page string="Ingredient">
+                                <field name="meal_ingredient_ids">
+                                    <tree editable="top">
+                                        <field name='name' />
+                                        <field name='meal_id' />
+                                        <field name='product_id' />
+                                        <field name='quantity' />
+                                    </tree>
+
+                                    <form>
+                                        <sheet>
+                                            <group>
+                                                <field name='name' />
+                                            </group>
+                                            <group>
+                                                <field name='meal_id' />
+                                                <field name='product_id' />
+                                            </group>
+                                            <group>
+                                                <field name='quantity' />
+                                            </group>
+                                        </sheet>
+                                    </form>
+                                </field>
+                            </page>
+                        </notebook>
+
                     </sheet>
                 </form>
             </field>

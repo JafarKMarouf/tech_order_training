@@ -16,3 +16,6 @@ class Meal(models.Model):
         string='Category',
         ondelete='cascade'
     )
+    meal_ingredient_ids = fields.One2many('meal.ingredient', 'meal_id', string = "Ingredient")
+    
+    
