@@ -1,0 +1,56 @@
+<odoo>
+    <data>
+        <!-- meal ingredient form view -->
+        <record id="meal_ingredient_form_view" model="ir.ui.view">
+            <field name="name">meal.ingredient.form.view</field>
+            <field name="model">meal.ingredient</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <h1>
+                                <field name="name" />
+                            </h1>
+                            <group>
+                                <field name="meal_id" />
+                                <field name="product_id" />
+                                <field name="quantity" />
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- meal ingredient tree view -->
+        <record id="meal_ingredient_tree_view" model="ir.ui.view">
+            <field name="name">meal.ingredient.tree.view</field>
+            <field name="model">meal.ingredient</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name" />
+                    <field name="meal_id" />
+                    <field name="product_id" />
+                    <field name="quantity" />
+                </tree>
+            </field>
+        </record>
+
+        <!-- window action for meal ingredient -->
+        <record id="meal_ingredient_window_action" model="ir.actions.act_window">
+            <field name="name">Meal Ingredient</field>
+            <field name="res_model">meal.ingredient</field>
+            <field name="view_mode">tree,form</field>
+            <field name='context'>{'create' : False, 'edit' : False}</field>
+
+        </record>
+
+        <!-- meal ingredient menu item -->
+        <menuitem
+            id="meal_ingredient_menu"
+            name="Meal Ingredient"
+            parent="order_base_meal_menu"
+            action="meal_ingredient_window_action" />
+
+    </data>
+</odoo>
