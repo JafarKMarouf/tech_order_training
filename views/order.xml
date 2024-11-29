@@ -35,7 +35,7 @@
                         <notebook>
                             <page string="Items">
                                 <field name="item_ids">
-                                    <tree>
+                                    <tree editable="top">
                                         <field name='meal_id' />
                                         <field name='quantity' />
                                         <field name='price' />
