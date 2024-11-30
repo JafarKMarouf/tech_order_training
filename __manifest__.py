@@ -25,6 +25,7 @@ Long description of module's purpose
         "security/ir.model.access.csv",
         "views/meal.xml",
         "views/category.xml",
+        "wizard/add_external_item.xml",
         "views/order.xml",
         "views/order_tag.xml",
         "views/order_item.xml",

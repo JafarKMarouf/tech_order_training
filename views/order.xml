@@ -33,6 +33,15 @@
                             invisible="state in ('delivered','cancel')"
                             class="btn-danger" />
 
+                        <button
+                            string="Add External Item"
+                            name="%(tech_order_training.external_item_wizard_window_action)d"
+                            type="action"
+                            invisible="state in ('cancel','delivered')"
+                            class='oe_stat_button'
+                            icon="fa-pencil-square-o"
+                        />
+
                         <field
                             name='state'
                             widget='statusbar'

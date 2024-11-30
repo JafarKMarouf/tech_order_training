@@ -1,0 +1,39 @@
+<odoo>
+    <data>
+        <!-- External Item form view -->
+        <record id="external_item_wizard_form_view" model="ir.ui.view">
+            <field name="name">wizard.external.item.form.view</field>
+            <field name="model">wizard.external.item</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="external_item_ids"
+                            widget='many2many_tags'
+                            options="{'color_field': 'color', 'no_create': True}" />
+                    </group>
+                    <footer>
+                        <button string="Add Item"
+                            name="action_add_item"
+                            type="object"
+                            class="oe_highlight" />
+
+                        <button string='Close'
+                            class='btn-default'
+                            special='cancel' />
+                    </footer>
+
+                </form>
+            </field>
+        </record>
+
+
+        <!-- window action for External Item -->
+        <record id="external_item_wizard_window_action" model="ir.actions.act_window">
+            <field name="name">External Item</field>
+            <field name="res_model">wizard.external.item</field>
+            <field name="view_mode">form</field>
+            <field name='target'>new</field>
+        </record>
+
+    </data>
+</odoo>

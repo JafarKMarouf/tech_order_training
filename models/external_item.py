@@ -10,3 +10,4 @@ class ExternalItem(models.Model):
         'product.product',
         string='Product',
     )
+    color = fields.Integer(string = 'Color')
