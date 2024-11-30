@@ -33,6 +33,7 @@ Long description of module's purpose
         "wizard/feedback_reason.xml",
         "views/customer_feedback.xml",
         "views/external_item.xml",
+        "data/server_action.xml"
     ],
     # only loaded in demonstration mode
     'demo': [
