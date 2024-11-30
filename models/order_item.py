@@ -12,14 +12,18 @@ class OrderItem(models.Model):
 
     price = fields.Float(string = 'Price')
     quantity = fields.Float(string = 'Quantity')
-    total_price = fields.Float(string = 'Total Price')
+    total_price = fields.Float(string = 'Total Price', compute = '_compute_total_price')
 
     @api.onchange('meal_id')
     def set_price(self):
         if self.meal_id:
             self.price = self.meal_id.price
 
-    @api.onchange('price','quantity')
+    @api.depends('quantity','price')
     def _compute_total_price(self):
-        self.total_price = self.price * self.quantity
-    
+        for record in self:
+            record.total_price = record.price * record.quantity
+
+    # @api.onchange('price','quantity')
+    # def _compute_total_price(self):
+    #     self.total_price = self.price * self.quantity

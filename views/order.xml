@@ -124,7 +124,13 @@
                     <field name="name" />
                     <field name="customer_id" />
                     <field name="total_price" optional="hide" />
+
+
                     <field name="order_date" />
+                    <field name="order_type" />
+                    <field name="table_number" />
+                    <field name="is_urgent" optional="show" />
+                    <field name="note" optional="hide" />
                     <field name="state" widget="badge"
                         decoration-muted="state == 'draft'"
                         decoration-primary="state == 'confirm'"
@@ -132,11 +138,6 @@
                         decoration-danger="state == 'cancel'"
                         decoration-success="state == 'delivered'"
                     />
-                    <field name="order_type" />
-                    <field name="table_number"
-                        invisible="order_type != 'external'" />
-                    <field name="is_urgent" optional="show" />
-                    <field name="note" optional="hide" />
                 </tree>
             </field>
         </record>

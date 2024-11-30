@@ -26,6 +26,7 @@ class Order(models.Model):
         required = True, copy = False,
         default='internal'
     )
+    
     note = fields.Text(string = 'Note')
     order_date = fields.Date(
             string='Order Date',
@@ -36,7 +37,10 @@ class Order(models.Model):
     is_urgent = fields.Boolean(string = 'Is Urgent', copy = False)
     active = fields.Boolean(default=True)
     table_number = fields.Integer(string = 'Table Number')
-    total_price = fields.Float(string = 'Total Price', copy=False)
+    total_price = fields.Float(
+        string = 'Total Price', 
+        compute='_compute_total_price' )
+    
     order_tag_ids = fields.Many2many('order.tag', string = 'Tags')
     item_ids = fields.One2many('order.item', 'order_id', string="Items")    
     state = fields.Selection([
@@ -62,6 +66,14 @@ class Order(models.Model):
             if record.order_date < datetime.now().date():
                 raise ValidationError('Order Date Must not be in past')
     
+    @api.depends('item_ids','item_ids.total_price')
+    def _compute_total_price(self):
+        for record in self:
+            total_price = 0
+            for item in record.item_ids:
+                total_price = total_price + item.total_price
+            record.total_price = total_price
+
     def action_confirm(self):
         self.state = 'confirm'
         self.order_date = datetime.now().date()
