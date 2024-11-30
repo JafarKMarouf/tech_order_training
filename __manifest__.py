@@ -30,7 +30,8 @@ Long description of module's purpose
         "views/order_item.xml",
         "views/meal_ingredient.xml",
         "wizard/feedback_reason.xml",
-        "views/customer_feedback.xml"
+        "views/customer_feedback.xml",
+        "views/external_item.xml",
     ],
     # only loaded in demonstration mode
     'demo': [

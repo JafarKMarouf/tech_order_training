@@ -54,6 +54,8 @@ class Order(models.Model):
         compute='_compute_total_price' )
     
     order_tag_ids = fields.Many2many('order.tag', string = 'Tags')
+    external_item_ids = fields.Many2many('external.item',string = 'External Items')
+    
     item_ids = fields.One2many('order.item', 'order_id', string="Items")    
     state = fields.Selection([
         ('draft', 'Draft'),

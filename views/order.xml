@@ -25,7 +25,7 @@
                             name="action_delivered"
                             type="object"
                             invisible="state != 'in_process'"
-                            class="btn-dark" />
+                            class="btn-sucess" />
                         <button
                             string="Cancel"
                             name="action_cancel"
@@ -108,6 +108,22 @@
                                     </form>
                                 </field>
                             </page>
+
+                            <page string="External Items">
+                                <field name="external_item_ids">
+                                    <tree>
+                                        <field name="product_id" />
+                                    </tree>
+
+                                    <form>
+                                        <sheet>
+                                            <group>
+                                                <field name="product_id" />
+                                            </group>
+                                        </sheet>
+                                    </form>
+                                </field>
+                            </page>
                         </notebook>
                     </sheet>
                 </form>
@@ -145,6 +161,32 @@
                         decoration-danger="state == 'cancel'"
                         decoration-success="state == 'delivered'"
                     />
+                    <button
+                        string="Confirm"
+                        name="action_confirm"
+                        type="object"
+                        invisible="state != 'draft'"
+                        class="btn-primary" />
+                    <button
+                        string="InProcess"
+                        name="action_in_process"
+                        type="object"
+                        invisible="state != 'confirm'"
+                        class="btn-info" />
+
+                    <button
+                        string="Delivered"
+                        name="action_delivered"
+                        type="object"
+                        invisible="state != 'in_process'"
+                        class="btn-success" />
+                    <button
+                        string="Cancel"
+                        name="action_cancel"
+                        type="object"
+                        invisible="state in ('delivered','cancel')"
+                        class="btn-danger" />
+
                 </tree>
             </field>
         </record>

@@ -8,3 +8,4 @@ from . import order_tag
 from . import order_item
 from . import meal_ingredient
 from . import customer_feedback
+from . import external_item

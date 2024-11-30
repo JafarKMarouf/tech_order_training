@@ -1,0 +1,29 @@
+<odoo>
+    <data>
+
+        <!-- external items tree view -->
+        <record id="external_item_tree_view" model="ir.ui.view">
+            <field name="name">external.item.tree.view</field>
+            <field name="model">external.item</field>
+            <field name="arch" type="xml">
+                <tree editable="top">
+                    <field name="product_id" />
+                </tree>
+            </field>
+        </record>
+
+        <!-- window action for external items -->
+        <record id="external_item_window_action" model="ir.actions.act_window">
+            <field name="name">External Items</field>
+            <field name="res_model">external.item</field>
+            <field name="view_mode">tree</field>
+        </record>
+
+        <!-- base menu item -->
+        <menuitem
+            id="external_item_menu"
+            name="External Items"
+            parent="order_base_meal_menu"
+            action="external_item_window_action" />
+    </data>
+</odoo>
