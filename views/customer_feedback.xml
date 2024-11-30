@@ -27,9 +27,9 @@
                         class="btn-success"
                         invisible="state != 'new'" />
 
-                    <button name="action_rejected"
+                    <button name="%(tech_order_training.feedback_reason_window_action)d"
                         string='Rejected'
-                        type="object"
+                        type="action"
                         class="btn-danger"
                         invisible="state != 'new'"
                     />

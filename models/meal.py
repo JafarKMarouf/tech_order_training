@@ -10,16 +10,17 @@ class Meal(models.Model):
         string = 'Name', required=True,
         default= lambda self:_('NEW')
     )
-    _sql_constraints = [
-        ('name_uniq', 'UNIQUE (name)', 'Meal name already exists!'),
-    ]
     
     price = fields.Float(string = 'Price', copy=False)
     category_id = fields.Many2one(
         'order.meal.category',
         string='Category',
-        ondelete='cascade'
+        ondelete='cascade',
+        required=True
     )
+    _sql_constraints = [
+        ('name_uniq', 'UNIQUE (name)', 'Meal name already exists!'),
+    ]
     meal_ingredient_ids = fields.One2many('meal.ingredient', 'meal_id', string = "Ingredient")
     
     def view_all_feedbacks(self):

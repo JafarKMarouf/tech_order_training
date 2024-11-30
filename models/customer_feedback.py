@@ -9,6 +9,7 @@ class CustomeFeedback(models.Model):
     meal_id = fields.Many2one(
         'order.meal',
         string='Meal',
+        readonly=True
     )
     
     customer_id = fields.Many2one(
