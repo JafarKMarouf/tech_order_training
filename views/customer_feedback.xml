@@ -5,17 +5,18 @@
             <field name="name">customer.feedback.tree.view</field>
             <field name="model">customer.feedback</field>
             <field name="arch" type="xml">
-
                 <tree editable="top"
                     decoration-success="state == 'approved'"
                     decoration-danger="state == 'rejected'"
                     decoration-info="state == 'new'">
 
-                    <field name="name" />
-                    <field name="meal_id" />
+                    <field name="name" required="True" />
+                    <field name="meal_id" readonly="True" />
                     <field name="customer_id" required="True" />
                     <field name="rate" widget='priority' />
                     <field name="comment" />
+                    <field name="reason" />
+
                     <field name="state" widget="badge"
                         decoration-success="state == 'approved'"
                         decoration-danger="state == 'rejected'"
@@ -33,6 +34,7 @@
                         class="btn-danger"
                         invisible="state != 'new'"
                     />
+
                 </tree>
             </field>
         </record>

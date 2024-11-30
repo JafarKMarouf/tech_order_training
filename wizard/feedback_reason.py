@@ -10,4 +10,12 @@ class FeedbackReason(models.TransientModel):
     reason = fields.Char('Reason')
 
     def action_add_reason(self):
-        _logger.info("Hello world")
+        # feedback = self.env['customer.feedback'].search([('id','=',self.env.context.get('active_id'))])
+        feedback = feedback = self.env['customer.feedback'].browse(self.env.context.get('active_id'))
+        feedback.update({
+            'reason' : self.reason,
+            'state' : 'rejected'
+        })
+        # feedback.reason = self.reason
+        # feedback.state = 'rejected'
+        # _logger.info('context' + str(self.env.context))
