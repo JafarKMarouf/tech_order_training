@@ -28,13 +28,25 @@ class Order(models.Model):
     )
     
     note = fields.Text(string = 'Note')
+    
     order_date = fields.Date(
             string='Order Date',
             copy = False,
             default = fields.datetime.now(),
             # readonly=True
     )
-    is_urgent = fields.Boolean(string = 'Is Urgent', copy = False)
+
+    expected_duration  = fields.Integer(string = 'Expected Duration')
+    expected_date = fields.Datetime(string = 'Expected Date', 
+                            compute = '_compute_expected_date',
+                            inverse='_inverse_expected_duartion',
+                            # readonly=True
+    )
+    
+    is_urgent = fields.Boolean(string = 'Is Urgent', 
+                            copy = False, 
+                            default=True
+    )
     active = fields.Boolean(default=True)
     table_number = fields.Integer(string = 'Table Number')
     total_price = fields.Float(
@@ -73,6 +85,18 @@ class Order(models.Model):
             for item in record.item_ids:
                 total_price = total_price + item.total_price
             record.total_price = total_price
+          
+    @api.depends('order_date','expected_duration')
+    def _compute_expected_date(self):
+        for record in self:
+            record.expected_date = record.order_date + timedelta(days= record.expected_duration)
+    
+    def _inverse_expected_duartion(self):
+        for rec in self:
+            expected = (rec.expected_date.date() - rec.order_date).days
+            _logger.info('expected_duration : '+ str(expected))
+            rec.expected_duration = expected
+      
 
     def action_confirm(self):
         self.state = 'confirm'
